@@ -18,11 +18,16 @@ app.use(express.static("public"));
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
 // routes
 app.use(require("./routes/api.js"));
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
